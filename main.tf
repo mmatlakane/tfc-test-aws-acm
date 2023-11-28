@@ -1,23 +1,3 @@
-terraform {
-  required_providers {
-    aws = {
-      source        = "hashicorp/aws"
-      version       = "5.22.0"
-     
-    }
-  }
-}
-provider "aws" {
-  alias      = "validation_account"
-  access_key = var.dev_aws_key
-  secret_key = var.dev_aws_secret
-  region     = "us-east-1"
-
-assume_role {
-    role_arn = "arn:aws:iam::700688370064:role/route53"
-  }
-}
-
 resource "aws_acm_certificate" "cert_validation" {
   domain_name       = var.domain_name
   validation_method = var.dns_validation ? "DNS" : "EMAIL"
