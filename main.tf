@@ -37,7 +37,7 @@ resource "aws_acm_certificate_validation" "cert_validation_dns" {
 }
 resource "aws_acm_certificate_validation" "cert_validation_cross_account_dns" {
   count                   = var.dns_validation && var.cross_account_validation ? 1 : 0
-  #provider                = aws.validation_account
+  provider                = aws.validation_account
   certificate_arn         = aws_acm_certificate.cert_validation.arn
   validation_record_fqdns = [aws_route53_record.cert_validation_route53_record_cross_account[0].fqdn]
 }
